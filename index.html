@@ -21,7 +21,102 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="all-menu">
+        <a href="">Home</a>
+        <a href="">Breaking News</a>
+        <a href="">Regular News</a>
+        <a href="">International News</a>
+        <a href="">Sports</a>
+        <a href="">Entertainment</a>
+        <a href="">Culture</a>
+        <a href="">Art</a>
+        <a href="">All News</a>
+    </div>
+
+    <div  id="blogs">
+        <!-- Blogs will be rendered here -->
+    </div>
+
+    <script>
+        const apiResponse = {
+            status: true,
+            data: [
+                {
+                    _id: "0282e0e58a5c404fbd15261f11c2ab6a",
+                    others_info: {
+                        is_todays_pick: false,
+                        is_trending: true
+                    },
+                    category_id: "01",
+                    rating: {
+                        number: 4.5,
+                        badge: "Excellent"
+                    },
+                    total_view: 488,
+                    title: "Biden Pledges Nearly $3 Billion To Ukraine In Largest U.S. Military Aid Package Yet",
+                    author: {
+                        name: "Jimmy Dane",
+                        published_date: "2022-08-24 17:27:34",
+                        img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80"
+                    },
+                    thumbnail_url: "https://i.ibb.co/QnwC4sG/unsplash-Eh-Tc-C9s-YXsw-11.png",
+                    image_url: "https://i.ibb.co/M23fhxm/unsplash-Eh-Tc-C9s-YXsw.png",
+                    details: "Wednesday, August 24, 2022 | Tag Cloud Tags: Biden, EU, Euro, Europe, Joe Biden, Military, News, Russia, Security, UK, Ukraine, United States, Worthy News (Worthy News) – U.S. President Joe Biden has announced nearly $3 billion in new U.S. military aid for Kyiv as Ukraine marked its independence day six months after Russia invaded the country.'The United States of America is committed to supporting the people of Ukraine as they continue the fight to defend their sovereignty. As part of that commitment, I am proud to announce our biggest tranche of security assistance to date: approximately $2."
+                },
+                {
+                    _id: "f69a695f037cd9484cecaea37ca71011",
+                    others_info: {
+                        is_todays_pick: false,
+                        is_trending: true
+                    },
+                    category_id: "01",
+                    rating: {
+                        number: 4.8,
+                        badge: "Excellent"
+                    },
+                    total_view: 400,
+                    title: "Tucker Carlson Swears Vladimir Putin Is Winning The War In Ukraine",
+                    author: {
+                        name: "Jennifer Wood",
+                        published_date: "2022-08-30 16:38:45",
+                        img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80"
+                    },
+                    thumbnail_url: "https://i.ibb.co/k8XBcMX/unsplash-Eh-Tc-C9s-YXsw-15.png",
+                    image_url: "https://i.ibb.co/BZZ5WKv/unsplash-Eh-Tc-C9s-YXsw-4.png",
+                    details: "Tucker Carlson has rarely met a dictator's ass he didn't want to kiss, and Vladimir Putin is at the very top of that puckering up list. The Fox News host is something of a folk hero in Russia: Because of the pro-Putin propaganda he so often spews, the Kremlin has encouraged Russia's state TV to air as much of Tucker's face as possible — and they're certain to love his latest rant about how Putin is winning the war in Ukraine, which does not seem to be the case. But on Fox News, what Tucker says goes."
+                }
+                // Add the rest of the articles here
+            ]
+        };
+
+        function renderBlogs(blogs) {
+            const blogsContainer = document.getElementById('blogs');
+            blogsContainer.innerHTML = '';
+
+            blogs.forEach(blog => {
+                const blogElement = document.createElement('div');
+                blogElement.classList.add('blog');
+
+                blogElement.innerHTML = `
+                    <div class="img">
+                        <img src="${blog.thumbnail_url}" alt="${blog.title}">
+                    </div>
+                    <div class="content">
+                        <h2>${blog.title}</h2>
+                        <p>${blog.details.substring(0, 200)}...</p>
+                        <p><strong>Author:</strong> ${blog.author.name}</p>
+                        <p><strong>Published Date:</strong> ${new Date(blog.author.published_date).toLocaleDateString()}</p>
+                        <p><strong>Rating:</strong> ${blog.rating.number} (${blog.rating.badge})</p>
+                        <p><strong>Total Views:</strong> ${blog.total_view}</p>
+                    </div>
+                `;
+
+                blogsContainer.appendChild(blogElement);
+            });
+        }
+
+        renderBlogs(apiResponse.data);
+    </script>
 </body>
 
 </html>
